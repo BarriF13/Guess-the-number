@@ -36,6 +36,37 @@ guessBtn.addEventListener('click' ,function(){
 if(isNaN(guess) || guess < min || guess > max ){
   setMessage(`Please enter a number between ${min} and ${max}` , 'red');
 }
+// Check if won
+if( guess === winningNum){
+  
+  // Disable input
+  guessInput.disabled = true;
+  // Change border color 
+  guessInput.style.borderColor = 'green';
+  setMessage(`You win, ${winningNum} is winner. ` , 'green');
+
+} else {
+   // Wrong Number 
+   guessesLeft -= 1;
+
+   if(guessesLeft === 0 ){
+      // Disable input
+  guessInput.disabled = true;
+  // Change border color 
+  guessInput.style.borderColor = 'pink';
+  // Lost
+    setMessage(`You Lost, The correct number was ${winningNum}` , 'pink');
+} else {
+
+  // Change border color 
+    guessInput.style.borderColor = 'blue';
+
+  // Clear Input
+  guessInput.value ='';
+  // Game continues -wrong 
+    setMessage(`${guess} is not correct, guess again ${guessesLeft} guesses left`,'blue');
+}
+}
 }); 
 
 // Set message
