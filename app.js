@@ -38,25 +38,14 @@ if(isNaN(guess) || guess < min || guess > max ){
 }
 // Check if won
 if( guess === winningNum){
-  
-  // Disable input
-  guessInput.disabled = true;
-  // Change border color 
-  guessInput.style.borderColor = 'green';
-  setMessage(`You win, ${winningNum} is winner. ` , 'green');
-
+   // Game over 
+   gameOver(true , `You won, ${winningNum} is the winner!`  ); 
 } else {
    // Wrong Number 
    guessesLeft -= 1;
-
    if(guessesLeft === 0 ){
-      // Disable input
-  guessInput.disabled = true;
-  // Change border color 
-  guessInput.style.borderColor = 'pink';
-  // Lost
-    setMessage(`You Lost, The correct number was ${winningNum}` , 'pink');
-} else {
+    gameOver( false , `You Lost, The correct number was ${winningNum}`);
+   } else {
 
   // Change border color 
     guessInput.style.borderColor = 'blue';
@@ -73,4 +62,21 @@ if( guess === winningNum){
 function setMessage(msg , color ){
   message.style.color =  color;
   message.textContent = msg;
+}
+
+// Game over 
+
+function gameOver(won, msg){
+  let color 
+  won === true ? color = 'green' : color = 'red';
+
+   // Disable input
+   guessInput.disabled = true;
+   // Set color 
+   message.style.color = color;
+   // Change border color 
+   guessInput.style.borderColor = color;
+   // Set message
+   setMessage(msg);
+
 }
